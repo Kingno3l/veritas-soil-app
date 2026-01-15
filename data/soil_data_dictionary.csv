@@ -1,0 +1,52 @@
+Spreadsheet tab,Element or value display name,Description,Data type,Character length,Acceptable Values,Required?,Accepts null value?
+CL_coop_lab_phase1,DSP_project,Unique project name associated with the project,varchar,255,n/a,y,n
+CL_coop_lab_phase1,Soil,soil as identified in project,varchar,255,n/a,y,n
+CL_coop_lab_phase1,Site_Field_ID,Unique field/site location assigned by porject - UsersiteID if it exists,varchar,255,n/a,y,n
+CL_coop_lab_phase1,PedonID,Primary Project Pedon ID ,varchar,255,n/a,y,n
+CL_coop_lab_phase1,trt,General information about land use/mgmt evaluated,varchar,255,n/a,y,n
+CL_coop_lab_phase1,Label_full,Management symbol only or combined with ecological state,varchar,255,n/a,y,n
+CL_coop_lab_phase1,Label,Generalized management info - assigned by DSP4SH coordinator for analysis,varchar,255,n/a,y,n
+CL_coop_lab_phase1,Internal,Management or ecological state for each site used by project,varchar,255,n/a,n,y
+CL_coop_lab_phase1,Internal label,Additional pedon ID assigned by project ,varchar,255,n/a,n,y
+CL_coop_lab_phase1,Internal Plot,Sequence assigned to DSP plot,integer,4,n/a,n,y
+CL_coop_lab_phase1,DSP_Pedon,Unique Pedon ID assigned by project,varchar,255,n/a,n,y
+CL_coop_lab_phase1,Pedon_Num,Number within field/site,integer,4,n/a,y,n
+CL_coop_lab_phase1,DSP_Plot_ID,Connotatitive field/site location assigned by DSP4SH coordinator,varchar,255,n/a,y,n
+CL_coop_lab_phase1,DSP_Pedon_ID,Unique pedon ID assigned by DSP4SH coordinator,varchar,255,n/a,y,n
+CL_coop_lab_phase1,layer_no,Sequence number of sample within pedon,integer,4,n/a,y,n
+CL_coop_lab_phase1,hzdesg,Horizon nomenclature ,varchar,255,n/a,n,y
+CL_coop_lab_phase1,hrzdep_t,Upper depth (cm) of sample/layer taken,integer,4,n/a,y,n
+CL_coop_lab_phase1,hrzdep_b,Lower depth (cm) of sample/layer taken,integer,4,n/a,y,n
+CL_coop_lab_phase1,LayerID,User site ID with layer sequence used by cooperator,varchar,255,n/a,n,y
+CL_coop_lab_phase1,DSP_sample_ID,DSP_pedon_ID and sequence number,varchar,255,n/a,y,n
+CL_coop_lab_phase1,Sand%,Total Sand (%),decimal,255,n/a,n,y
+CL_coop_lab_phase1,Silt%,Total Silt (%),decimal,255,n/a,n,y
+CL_coop_lab_phase1,Clay%,Total Clay (%),decimal,255,n/a,n,y
+CL_coop_lab_phase1,Texture,General texture class,varchar,255,n/a,n,y
+CL_coop_lab_phase1,Bulk_Density,Core bulk density (g cm-3),decimal,255,n/a,n,y
+CL_coop_lab_phase1,alt_BD,Alternate bulk density method (g cm-3),decimal,255,n/a,n,y
+CL_coop_lab_phase1,Water_Content,Gravimetric water content (%),decimal,255,n/a,n,y
+CL_coop_lab_phase1,SOC_pct,"Carbon (%), measured with combustion and corrected for CaCO3 ",decimal,255,n/a,n,y
+CL_coop_lab_phase1,TN_pct,"Total nitrogen (%), measured with combustion",decimal,255,n/a,n,y
+CL_coop_lab_phase1,KSSL_WSA,Water stable aggregate (%) - 1mm aggregates maintained on sieve measured using KSSL-based laboratory method-3 (Stott 2019),decimal,255,n/a,n,y
+CL_coop_lab_phase1,ARS_AggStab_MWD,ARS (yoder) method mean weight diameter measured using ARS-based laboratory method-2 (Stott 2019),decimal,255,n/a,n,y
+CL_coop_lab_phase1,ARS_AggStab_TotalWS,Total water stable soil aggregate fraction (%) measured using ARS-based laboratory method-2 (Stott 2019),decimal,255,n/a,n,y
+CL_coop_lab_phase1,ARS_WS_2-8,ARS (yoder) % fraction ranging from 2mm - 8mm diameter size,decimal,255,n/a,n,y
+CL_coop_lab_phase1,ARS_WS_.5-2,ARS (yoder) % fraction ranging from 0.5mm - 2mm diameter size,decimal,255,n/a,n,y
+CL_coop_lab_phase1,ARS_WS_250-500,ARS (yoder) % fraction ranging from 250µm - 500µm diameter size,decimal,255,n/a,n,y
+CL_coop_lab_phase1,ARS_WS_53-250,ARS (yoder) % fraction ranging from 53µm - 250µm diameter size,decimal,255,n/a,n,y
+CL_coop_lab_phase1,EC,Electrical conductivity,decimal,255,n/a,n,y
+CL_coop_lab_phase1,pH,Soil-water suspension (1:1),decimal,255,n/a,n,y
+CL_coop_lab_phase1,Soil_Respiration,"Carbon dioxide respiration (mg CO2 g-1 dry soil), 4 day incubation, measured using CASH-based laboratory method-4 (Stott 2019)",decimal,255,n/a,n,y
+CL_coop_lab_phase1,Bglucosidase,Soil enzyme - B-glucosidase (ug p-nitrophynol.g-1 dry soil) measured using laboratory method-5 (Stott 2019) ,decimal,255,n/a,n,y
+CL_coop_lab_phase1,Bglucosaminidase,Soil enzyme - N-acetyl-B-glucosaminidase (ug p-nitrophynol.g-1 dry soil) measured using laboratory method-5 (Stott 2019),decimal,255,n/a,n,y
+CL_coop_lab_phase1,Alkaline Phosphatase,Soil enzyme - Alkaline phosphatase (ug p-nitrophynol g-1 dry soil) measured using laboratory method-5 (Stott 2019),decimal,255,n/a,n,y
+CL_coop_lab_phase1,Acid Phosphatase,Soil enzyme - Acid phosphatase (ug p-nitrophynol.g-1 dry soil) measured using laboratory method-5 (Stott 2019),decimal,255,n/a,n,y
+CL_coop_lab_phase1,Phosphodiesterase,Soil enzyme - Phosphodiesterase (ug p-nitrophynol.g-1 dry soil) measured using laboratory method-5 (Stott 2019),decimal,255,n/a,n,y
+CL_coop_lab_phase1,Arylsulfatase,Soil enzyme - Arylsulfatase (ug p-nitrophynol.g-1 dry soil) measured using laboratory method-5 (Stott 2019),decimal,255,n/a,n,y
+CL_coop_lab_phase1,POX_C,Permanganate oxidizable carbon (mg C.kg-1 dry soil) measured using KSSL-based laboratory method-6 (Stott 2019),decimal,255,n/a,n,y
+CL_coop_lab_phase1,ACE,Autoclavable citrate extractable protein content (ug protein.g-1 dry soil) measured using laboratory method-7 (Stott 2019),decimal,255,n/a,n,y
+CL_coop_lab_phase1,WEOC (mg/kg),Water extractable organic carbon (mg/kg),decimal,255,n/a,n,y
+CL_coop_lab_phase1,WEON (mg/kg),Water extractable organic nitrogen (mg/kg),decimal,255,n/a,n,y
+CL_coop_lab_phase1, KSSL_LabSampleNo,Laboratory sample ID (if assigned) generated and added by NCSS KSSL staff,decimal,255,n/a,n,y
+CL_coop_lab_phase1,PLFA_ID,link individual samples to SHAC PLFA samples,,,,,
