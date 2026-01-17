@@ -1,31 +1,39 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 import numpy as np
 import tensorflow as tf
+import joblib
 
 # Initialize app
 app = FastAPI(title="Soil SOC Prediction API")
 
-# Load trained CNN model
-# model = tf.keras.models.load_model("models/cnn/soil_soc_cnn.keras")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://localhost:5173"], # Your React port
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# Load the Simple Dense Model
-model = tf.keras.models.load_model("models/soil_soc_model.keras")
+# -------- LOAD CNN MODEL AND SCALER --------
+model = tf.keras.models.load_model("models/cnn/soil_soc_cnn.keras")
+scaler = joblib.load("models/scaler.pkl")
+
 # -------- INPUT SCHEMA --------
 class SoilInput(BaseModel):
     Bulk_Density: float
+    alt_BD: float
     Water_Content: float
-    SOC_pct: float
     pH: float
-    POX_C: float
-    ACE: float
+    EC: float
+    Soil_Respiration: float
     Bglucosidase: float
     Bglucosaminidase: float
     Alkaline_Phosphatase: float
     Acid_Phosphatase: float
-    Phosphodiesterase: float
-    Arylsulfatase: float
-
+    POX_C: float
+    ACE: float
 
 # -------- ROOT ENDPOINT --------
 @app.get("/")
@@ -35,26 +43,29 @@ def root():
 # -------- PREDICTION ENDPOINT --------
 @app.post("/predict")
 def predict_soc(data: SoilInput):
-    # Convert input JSON to list in same order as training
+    # Convert input to numpy array
     input_list = [
         data.Bulk_Density,
+        data.alt_BD,
         data.Water_Content,
-        data.SOC_pct,
         data.pH,
-        data.POX_C,
-        data.ACE,
+        data.EC,
+        data.Soil_Respiration,
         data.Bglucosidase,
         data.Bglucosaminidase,
         data.Alkaline_Phosphatase,
         data.Acid_Phosphatase,
-        data.Phosphodiesterase,
-        data.Arylsulfatase
+        data.POX_C,
+        data.ACE
     ]
 
-    # Convert to 3D numpy array for CNN
-    input_array = np.array([input_list]).reshape((1, len(input_list), 1))
+    # Scale the features using training scaler
+    input_scaled = scaler.transform([input_list])
 
-    # Predict
+    # Reshape for CNN: (1, n_features, 1)
+    input_array = input_scaled.reshape((1, input_scaled.shape[1], 1))
+
+    # Predict SOC
     prediction = model.predict(input_array)
 
     return {"predicted_SOC": float(prediction[0][0])}

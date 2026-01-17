@@ -1,6 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import joblib
+import os
 
 # STEP 1: Load the dataset
 df = pd.read_csv("data/soil_data.csv")
@@ -28,7 +30,6 @@ df = df[features + [target]]
 
 # STEP 4: Remove rows where target is missing
 df = df.dropna(subset=[target])
-
 print("Rows after dropping missing target:", df.shape[0])
 
 # STEP 5: Fill missing feature values with column mean
@@ -53,4 +54,8 @@ pd.DataFrame(X_test, columns=features).to_csv("data/X_test.csv", index=False)
 y_train.to_csv("data/y_train.csv", index=False)
 y_test.to_csv("data/y_test.csv", index=False)
 
-print("Phase 2 complete: prepared datasets saved.")
+# STEP 10: Save scaler (CRITICAL for deployment)
+os.makedirs("models", exist_ok=True)
+joblib.dump(scaler, "models/scaler.pkl")
+
+print("Phase 2 complete: data prepared and scaler saved.")
