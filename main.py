@@ -23,17 +23,17 @@ scaler = joblib.load("models/scaler.pkl")
 # -------- INPUT SCHEMA --------
 class SoilInput(BaseModel):
     Bulk_Density: float
-    alt_BD: float
     Water_Content: float
     pH: float
-    EC: float
-    Soil_Respiration: float
+    POX_C: float
+    ACE: float
     Bglucosidase: float
     Bglucosaminidase: float
     Alkaline_Phosphatase: float
     Acid_Phosphatase: float
-    POX_C: float
-    ACE: float
+    Phosphodiesterase: float
+    Arylsulfatase: float
+
 
 # -------- ROOT ENDPOINT --------
 @app.get("/")
@@ -43,29 +43,22 @@ def root():
 # -------- PREDICTION ENDPOINT --------
 @app.post("/predict")
 def predict_soc(data: SoilInput):
-    # Convert input to numpy array
     input_list = [
         data.Bulk_Density,
-        data.alt_BD,
         data.Water_Content,
         data.pH,
-        data.EC,
-        data.Soil_Respiration,
+        data.POX_C,
+        data.ACE,
         data.Bglucosidase,
         data.Bglucosaminidase,
         data.Alkaline_Phosphatase,
         data.Acid_Phosphatase,
-        data.POX_C,
-        data.ACE
+        data.Phosphodiesterase,
+        data.Arylsulfatase
     ]
 
-    # Scale the features using training scaler
-    input_scaled = scaler.transform([input_list])
+    # Convert to numpy array for CNN
+    input_array = np.array([input_list]).reshape(1, len(input_list), 1)
 
-    # Reshape for CNN: (1, n_features, 1)
-    input_array = input_scaled.reshape((1, input_scaled.shape[1], 1))
-
-    # Predict SOC
     prediction = model.predict(input_array)
-
     return {"predicted_SOC": float(prediction[0][0])}
