@@ -1,69 +1,54 @@
 import pandas as pd
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense, Dropout
-from tensorflow.keras.callbacks import EarlyStopping
-import numpy as np
+from tensorflow.keras.layers import Dense, Conv1D, Flatten, Input, Dropout
 import os
 
-# STEP 1: Load prepared data (CSV)
-X_train = pd.read_csv("data/X_train.csv").values
-X_test = pd.read_csv("data/X_test.csv").values
-y_train = pd.read_csv("data/y_train.csv").values
-y_test = pd.read_csv("data/y_test.csv").values
+# 1. Load Prepared Data
+X_train = pd.read_csv("data/X_train.csv")
+y_train = pd.read_csv("data/y_train.csv")
+X_test = pd.read_csv("data/X_test.csv")
+y_test = pd.read_csv("data/y_test.csv")
 
-# STEP 2: Reshape for CNN (samples, features, channels)
-X_train = X_train.reshape((X_train.shape[0], X_train.shape[1], 1))
-X_test = X_test.reshape((X_test.shape[0], X_test.shape[1], 1))
+# 2. Reshape for CNN (Samples, Features, 1)
+# CNNs need 3 dimensions: [Rows, 4 Columns, 1 Channel]
+X_train_reshaped = X_train.values.reshape(X_train.shape[0], X_train.shape[1], 1)
+X_test_reshaped = X_test.values.reshape(X_test.shape[0], X_test.shape[1], 1)
 
-print("CNN input shape:", X_train.shape)
+input_shape = (4, 1)  # 4 Sensors
+output_units = y_train.shape[1] # 7 Predictions
 
-# STEP 3: Build CNN model
+# 3. Build Model (Matches Section 3.6.2)
 model = Sequential([
-    Conv1D(filters=32, kernel_size=3, activation="relu",
-           input_shape=(X_train.shape[1], 1)),
-    MaxPooling1D(pool_size=2),
-
-    Conv1D(filters=64, kernel_size=3, activation="relu"),
-    MaxPooling1D(pool_size=2),
-
+    Input(shape=input_shape),
+    
+    # Feature Extraction
+    Conv1D(filters=32, kernel_size=2, activation='relu', padding='same'),
+    Dropout(0.2),
+    Conv1D(filters=64, kernel_size=2, activation='relu', padding='same'),
     Flatten(),
-    Dense(64, activation="relu"),
-    Dropout(0.3),
-    Dense(1)
+    
+    # Reasoning
+    Dense(64, activation='relu'),
+    Dense(32, activation='relu'),
+    
+    # Output (Regression)
+    Dense(output_units, activation='linear') 
 ])
 
-# STEP 4: Compile
-model.compile(
-    optimizer="adam",
-    loss="mse",
-    metrics=["mae"]
-)
+# 4. Compile & Train
+model.compile(optimizer='adam', loss='mse', metrics=['mae'])
 
-# STEP 5: Early stopping
-early_stop = EarlyStopping(
-    monitor="val_loss",
-    patience=10,
-    restore_best_weights=True
-)
-
-# STEP 6: Train
-history = model.fit(
-    X_train,
-    y_train,
-    validation_split=0.2,
-    epochs=150,
+print("🚀 Training Neural Network...")
+model.fit(
+    X_train_reshaped, y_train,
+    epochs=50, 
     batch_size=16,
-    callbacks=[early_stop],
+    validation_data=(X_test_reshaped, y_test),
     verbose=1
 )
 
-# STEP 7: Evaluate
-loss, mae = model.evaluate(X_test, y_test, verbose=0)
-print(f"CNN Test MAE: {mae:.2f}")
-
-# STEP 8: Save model
+# 5. Save Model
 os.makedirs("models/cnn", exist_ok=True)
 model.save("models/cnn/soil_soc_cnn.keras")
-
-print("CNN model trained and saved successfully.")
+print("✅ Model Trained & Saved.")
