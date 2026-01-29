@@ -24,7 +24,7 @@ try:
     model = tf.keras.models.load_model("models/cnn/soil_soc_cnn.keras")
     scaler = joblib.load("models/scaler.pkl")
     target_columns = joblib.load("models/target_columns.pkl")
-    print("✅ Model, Scaler, and Target Columns loaded successfully.")
+    print("Model, Scaler, and Target Columns loaded successfully.")
 except Exception as e:
     print(f"⚠️ Error loading assets: {e}")
     print("Did you run 'train_cnn_model.py' yet?")

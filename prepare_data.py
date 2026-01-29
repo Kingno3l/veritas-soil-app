@@ -63,4 +63,4 @@ y_test.to_csv("data/y_test.csv", index=False)
 joblib.dump(scaler, "models/scaler.pkl")
 joblib.dump(target_columns, "models/target_columns.pkl") # Save names for API mapping
 
-print("✅ Data Prepared: Temperature synthesized, Scaler saved.")
+print("Data Prepared: Temperature synthesized, Scaler saved.")

@@ -3,27 +3,27 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-# 1️⃣ Load the dataset
+# 1️ Load the dataset
 data_path = "data/soil_data.csv"  # adjust if your file has a different name
 df = pd.read_csv(data_path)
 
-# 2️⃣ Quick look at the first 5 rows
+# 2️ Quick look at the first 5 rows
 print("First 5 rows:")
 print(df.head())
 
-# 3️⃣ Dataset info
+# 3️ Dataset info
 print("\nDataset info:")
 print(df.info())
 
-# 4️⃣ Descriptive statistics
+# 4️ Descriptive statistics
 print("\nBasic statistics:")
 print(df.describe())
 
-# 5️⃣ Check for missing values
+# 5️ Check for missing values
 print("\nMissing values per column:")
 print(df.isnull().sum())
 
-# 6️⃣ Correlation heatmap (Numeric columns only)
+# 6️ Correlation heatmap (Numeric columns only)
 plt.figure(figsize=(12, 10))  # Increased size for better visibility
 
 # Select only numeric columns first
@@ -34,7 +34,7 @@ sns.heatmap(numeric_df.corr(), annot=False, cmap="coolwarm") # annot=False is be
 plt.title("Correlation between soil parameters")
 plt.show()
 
-# 7️⃣ Histograms of numeric columns
+# 7️ Histograms of numeric columns
 df.hist(bins=20, figsize=(12,8))
 plt.show()
 

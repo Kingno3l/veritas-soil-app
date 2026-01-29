@@ -39,7 +39,7 @@ model = Sequential([
 # 4. Compile & Train
 model.compile(optimizer='adam', loss='mse', metrics=['mae'])
 
-print("🚀 Training Neural Network...")
+print("Training Neural Network...")
 model.fit(
     X_train_reshaped, y_train,
     epochs=50, 
@@ -51,4 +51,4 @@ model.fit(
 # 5. Save Model
 os.makedirs("models/cnn", exist_ok=True)
 model.save("models/cnn/soil_soc_cnn.keras")
-print("✅ Model Trained & Saved.")
+print("Model Trained & Saved.")
