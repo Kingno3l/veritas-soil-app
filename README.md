@@ -1,4 +1,4 @@
-# DEEP LEARNING-ENABLED INTERNET OF THINGS FOR INTELLIGENT SOIL HEALTH MONITORING IN PRECISION AGRICULTURAL SYSTEMS API (Backend)
+# 🧠 DEEP LEARNING-ENABLED INTERNET OF THINGS FOR INTELLIGENT SOIL HEALTH MONITORING IN PRECISION AGRICULTURAL SYSTEMS (Backend)
 
 **Project Code:** Victoria Uzuegbu Veritas MSc Final Year Project
 **Tech Stack:** Python, FastAPI, TensorFlow, NumPy
@@ -18,19 +18,40 @@ This is the intelligence core of the Soil Health Monitoring System. It hosts the
 
 ## 🚀 Setup & Installation
 
-Follow these steps to run the backend server locally.
+Follow these steps to download and run the backend server locally.
 
 ### 1. Prerequisites
-* Python 3.9, 3.10, or 3.11 (Recommended for TensorFlow compatibility).
+* [Python](https://www.python.org/) 3.9, 3.10, or 3.11 (Recommended for TensorFlow compatibility).
+* [Git](https://git-scm.com/) installed on your machine.
 
-### 2. Navigate to the Directory
-Ensure you are in the `backend` folder:
+### 2. Clone the Repository
+Open your terminal and run the following command to download the project:
+
+```bash
+git clone [https://github.com/Kingno3l/veritas-soil-app.git](https://github.com/Kingno3l/veritas-soil-app.git)
+cd veritas-soil-app
+
+```
+
+### 3. Switch to the Active Branch ⚠️
+
+**Important:** The latest stable code is on the `fix-bug` branch. You must switch to it before running anything.
+
+```bash
+git checkout fix-bug
+
+```
+
+### 4. Navigate to the Backend Directory
+
+Now move into the specific folder for this API:
+
 ```bash
 cd backend
 
 ```
 
-### 3. Create a Virtual Environment
+### 5. Create a Virtual Environment
 
 It is best practice to isolate dependencies.
 
@@ -50,7 +71,7 @@ venv\Scripts\activate
 
 ```
 
-### 4. Install Dependencies
+### 6. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -77,8 +98,8 @@ uvicorn main:app --reload
 
 Once the server is running, you can access the interactive documentation:
 
-* **Swagger UI:** [http://127.0.0.1:8000/docs](https://www.google.com/search?q=http://127.0.0.1:8000/docs)
-* **ReDoc:** [http://127.0.0.1:8000/redoc](https://www.google.com/search?q=http://127.0.0.1:8000/redoc)
+* **Swagger UI:** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+* **ReDoc:** [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
 ### Main Endpoint: `/predict`
 
@@ -120,7 +141,7 @@ backend/
 ## ⚠️ Troubleshooting
 
 **1. "ModuleNotFoundError"**
-Make sure you activated your virtual environment (Step 3) before running the install command.
+Make sure you activated your virtual environment (Step 5) before running the install command.
 
 **2. TensorFlow Version Errors**
 If you encounter errors regarding TensorFlow versions on Render or locally, ensure you are using a compatible Python version (3.9 - 3.11). Python 3.13 is currently not fully supported by standard TensorFlow releases.
